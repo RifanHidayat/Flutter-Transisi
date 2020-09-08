@@ -18,7 +18,7 @@ class _HomeState extends State<HomeScreen> {
 
   Future getData() async {
     http.Response response = await http
-        .get("https://reqres.in/api/users?page=2");
+        .get("https://reqres.in/api/users");
     data = jsonDecode(response.body);
     print(data);
     setState(() {

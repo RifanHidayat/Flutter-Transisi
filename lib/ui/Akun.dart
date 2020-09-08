@@ -66,7 +66,11 @@ class _AkunScreenState extends State<AkunScreen> {
     SharedPreferences.getInstance();
     setState(() {
     sharedPreferences.clear();
-    _loginStatus = statusLogin.notSignIn;
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+      ModalRoute.withName('/BottomBarMenu'),
+    );
 
 
     });

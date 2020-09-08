@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:transisi/ui/Akun.dart';
 import 'package:transisi/ui/Home.dart';
-import 'package:transisi/ui/Login.dart';
-import 'package:transisi/ui/PageWidget.dart';
 import 'package:transisi/ui/Search.dart';
 
 class PageHomeBottomMenu extends StatefulWidget {

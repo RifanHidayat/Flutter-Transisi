@@ -129,7 +129,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
              }else if (first_name.contains(" ")){
                showSnakeBar(scaffoldState, 'First Name tidak boleh mengandung spasi');
              }else if (first_name.length>10){
-               showSnakeBar(scaffoldState, 'First Name tidak boleh lebih dari 10 karakter');
+               showSnakeBar(scaffoldState, 'Firstg Name tidak boleh lebih dari 10 karakter');
              }else if (last_name.isEmpty){
                showSnakeBar(scaffoldState, 'Firts Name tidak boleh kosong');
              } else if (last_name.contains(" ")){
