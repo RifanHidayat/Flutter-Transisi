@@ -1,5 +1,4 @@
 
-// http://monitorsibi.000webhostapp.com/RestFullApi/getData
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -14,6 +13,8 @@ class SearchScreen extends StatefulWidget {
 }
 Map data;
 List userData = [];
+var loading = false;
+
 class _HomePageState extends State<SearchScreen> {
 
   List<Datum> _ModelList = List<Datum>();
@@ -21,19 +22,27 @@ class _HomePageState extends State<SearchScreen> {
 
 
   Future<List<Datum>> fetchNotes() async {
+    setState(() {
+      loading = true;
+    });
     var url = 'https://reqres.in/api/users';
     var response = await http.get(url);
     data=jsonDecode(response.body);
     userData=data["data"];
     var notes = List<Datum>();
 
-    if (response.statusCode == 200) {
-      var notesJson = userData;
-      for (var noteJson in notesJson) {
-        notes.add(Datum.fromJson(noteJson));
+
+    setState(() {
+      if (response.statusCode == 200) {
+        var notesJson = userData;
+        for (var noteJson in notesJson) {
+          notes.add(Datum.fromJson(noteJson));
+        }
       }
-    }
+      loading=false;
+    });
     return notes;
+
   }
 
   @override
@@ -54,15 +63,16 @@ class _HomePageState extends State<SearchScreen> {
           title: Text('Cari Employee'),
           backgroundColor: Colors.blue,
         ),
-        body: ListView.builder(
-
-
-          itemBuilder: (context, index) {
-            return index == 0 ?
-            _searchBar() :
-            _listItem(index-1);
-          },
-          itemCount: _ModelList.length+1,
+        body: Container(
+          child: loading?(Center(child: CircularProgressIndicator(),) )
+              : ListView.builder(
+            itemBuilder: (context, index) {
+              return index == 0 ?
+              _searchBar() :
+              _listItem(index-1);
+            },
+            itemCount: _ModelListTampil.length+1
+          ),
         )
     );
   }
@@ -92,7 +102,7 @@ class _HomePageState extends State<SearchScreen> {
   _listItem(index) {
     return InkWell(
       onTap: (){
-        final nDataList = _ModelList[index];
+
 
         Navigator.of(context).push(new MaterialPageRoute(
           builder: (BuildContext context) => new DetailPage(

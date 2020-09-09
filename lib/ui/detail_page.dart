@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'dart:async';
 
 
+// ignore: must_be_immutable
 class DetailPage extends StatefulWidget {
   DetailPage({this.id,this.firstname, this.lastname, this.email,this.avatar});
 
@@ -30,11 +28,7 @@ class _DetailPageState extends State<DetailPage> {
                 tag: widget.firstname,
                 child: new Material(
                   child: new InkWell(
-                    /*child: Image.network(
-                      (userData[index]["strMealThumb"]),
-                      height: 200.0,
-                      width: 150.0,
-                    ),*/
+
                     child: Image.network(
                       "${widget.avatar}",
                       height: 120,
@@ -100,10 +94,6 @@ class PartName extends StatelessWidget {
   }
 }
 
-
-
-
-
 class Email extends StatelessWidget {
   Email({this.email});
   final String email;
@@ -116,15 +106,7 @@ class Email extends StatelessWidget {
         padding: new EdgeInsets.all(10.0),
 
         child: new Card(
-//          child: Row(
-//            mainAxisAlignment: MainAxisAlignment.start,
-//            children: <Widget>[
-//              new Icon(Icons.email,
-//                color: Colors.blue,
-//              ),
-//              Text("$email")
-//            ],
-//          ),
+
           child: new Padding(
 
             padding: const EdgeInsets.all(15.0),
@@ -159,11 +141,7 @@ class Email extends StatelessWidget {
               )
               ],
             ),
-//            child: new Text(
-//              "$email",
-//              style: new TextStyle(fontSize: 18.0),
-//              textAlign: TextAlign.justify,
-//            ),
+
           ),
         ),
       ),

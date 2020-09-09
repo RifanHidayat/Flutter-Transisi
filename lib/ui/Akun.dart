@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:transisi/ui/BottomBarMenu.dart';
 import 'package:transisi/ui/Login.dart';
 class AkunScreen extends StatefulWidget {
   @override
@@ -87,7 +86,7 @@ class _AkunScreenState extends State<AkunScreen> {
 
         elevation: 5.0,
         onPressed: ()  {
-      logout();
+     alert();
 
         },
         padding: EdgeInsets.all(15.0),
@@ -121,5 +120,46 @@ class _AkunScreenState extends State<AkunScreen> {
         ),
       ),
     );
+  }
+
+  void alert() {
+    showDialog(
+        context: context,
+        builder: (context){
+          return AlertDialog(
+
+            content: new Text(
+
+                "yakin mau keluar dari aplikasi ini?"), actions: <Widget>[
+
+            new RaisedButton(
+                child: new Text(
+                  'Iya',
+                  style: TextStyle(color: Colors.white),
+                ),
+                color: Colors.red,
+                onPressed: () {
+                  Navigator.pop(context);
+                  logout();
+
+                }),
+            FlatButton(
+                child: new Text(
+                  'Batalkan',
+                  style: TextStyle(color: Colors.white),
+                ),
+                color: Colors.blue,
+                onPressed: () {
+                  Navigator.pop(context);
+
+                }
+            ),
+          ],
+          );
+
+        }
+    );
+
+
   }
 }

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 class CreateEmployee extends StatefulWidget {
   @override
@@ -14,8 +14,11 @@ class _CreateEmployeeState extends State<CreateEmployee> {
   Future<File> imageFile;
   final GlobalKey<ScaffoldState> scaffoldState =
   new GlobalKey<ScaffoldState>();
-  TextEditingController Cfirst_name = new TextEditingController();
-  TextEditingController Clast_name = new TextEditingController();
+  // ignore: non_constant_identifier_names
+  TextEditingController Cfirstname = new TextEditingController();
+  // ignore: non_constant_identifier_names
+  TextEditingController Clastname = new TextEditingController();
+  // ignore: non_constant_identifier_names
   TextEditingController Cemail = new TextEditingController();
   String base64;
   // ignore: non_constant_identifier_names
@@ -25,7 +28,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
   void addData() async {
     final responseData = await
     http.post("https://reqres.in/api/users",
-        body: {"first_name" : Cfirst_name.text, "last_name" : Clast_name.text,"email":Cemail.text}
+        body: {"first_name" : Cfirstname.text, "last_name" : Clastname.text,"email":Cemail.text}
     );
 
     final data = jsonDecode(responseData.body);
@@ -33,8 +36,8 @@ class _CreateEmployeeState extends State<CreateEmployee> {
     var tglBuat=data['createdAt'];
     if (id!=null){
       // ignore: unnecessary_statements
-      Cfirst_name.text="";
-      Clast_name.text="";
+      Cfirstname.text="";
+      Clastname.text="";
       Cemail.text="";
       showSnakeBar(scaffoldState,
           'Data Berhasil ditambahkan pada $tglBuat');
@@ -83,7 +86,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
 
          SizedBox(height: 20,),
          new TextField(
-                    controller: Cfirst_name,
+                    controller: Cfirstname,
                     decoration: new InputDecoration(
                     hintText: "Masukan first name",
                     labelText: "First Name",
@@ -91,7 +94,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                      borderRadius: new BorderRadius.circular(20.0)))),
                     SizedBox(height: 20,),
                   new TextField(
-                      controller: Clast_name,
+                      controller: Clastname,
                   decoration: new InputDecoration(
                   hintText: "Masukan last name",
                   labelText: "Last Name",
@@ -122,8 +125,8 @@ class _CreateEmployeeState extends State<CreateEmployee> {
            color: Colors.blue,
            onPressed: (){
              email=Cemail.text;
-             first_name=Cfirst_name.text;
-             last_name=Clast_name.text;
+             first_name=Cfirstname.text;
+             last_name=Clastname.text;
             if(first_name.isEmpty) {
              showSnakeBar(scaffoldState, 'First Name tidak boleh kosong');
              }else if (first_name.contains(" ")){
@@ -209,7 +212,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
   }
   pilihgalerry(ImageSource source){
     setState(() {
-      imageFile=ImagePicker.pickImage(source: source) as Future<File>;
+      imageFile=ImagePicker.pickImage(source: source);
     });
 
   }

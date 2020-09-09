@@ -145,9 +145,8 @@ class _LoginScreenState extends State<LoginScreen>{
     );
   }
 
-
-
   @override
+  // ignore: missing_return
   Widget build(BuildContext context) {
     switch (_loginStatus) {
       case statusLogin.notSignIn:
@@ -248,6 +247,7 @@ class _LoginScreenState extends State<LoginScreen>{
     );
   }
 // method untuk soimpan share pref
+  // ignore: non_constant_identifier_names
   saveDataPref(String EmailUser,String TokenUser,int value) async {
     SharedPreferences sharedPreferences = await
     SharedPreferences.getInstance();
@@ -264,6 +264,7 @@ class _LoginScreenState extends State<LoginScreen>{
 
   }
   submitDataLogin(String email,String password) async {
+    confirm();
     final responseData = await
     http.post("https://reqres.in/api/login", body: {
       "email": email,
@@ -277,10 +278,13 @@ class _LoginScreenState extends State<LoginScreen>{
 
 
       if (erorr=="user not found"){
+        Navigator.pop(context);
         showSnakeBar(scaffoldState,
             '$erorr');
       }else{
+
         _loginStatus = statusLogin.signIn;
+        Navigator.pop(context);
       saveDataPref(cEmail.text,token,1);
       }
 
@@ -304,7 +308,38 @@ class _LoginScreenState extends State<LoginScreen>{
     getDataPref();
     super.initState();
   }
+  void confirm() {
+    showDialog(
+        context: context,
+        builder: (context){
+          return AlertDialog(
 
+            content:Container(
+              height: 100,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text("Loading...."),
+                  SizedBox(height: 30,),
+                  CircularProgressIndicator(
+
+                    backgroundColor: Colors.blue[250],
+
+                  ),
+                ],
+              ),
+
+
+
+            )
+
+          );
+
+        }
+    );
+
+
+  }
 
 }
 

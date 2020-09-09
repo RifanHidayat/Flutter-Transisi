@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:transisi/ui/BottomBarMenu.dart';
 import 'package:transisi/ui/Login.dart';
 class SplassScreen extends StatefulWidget {
   @override
